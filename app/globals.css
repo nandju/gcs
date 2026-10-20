@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Accent corail de la référence visuelle */
+  --color-accent: #e8552d;
+  --color-accent-dark: #c9451f;
+  --color-accent-soft: #f6a88f;
+  --color-accent-light: #fdeee8;
+
+  /* Bleus nuit (titres, footer, bandeaux sombres) */
+  --color-navy-950: #0a1e30;
+  --color-navy-900: #12314e;
+  --color-navy-800: #1a3f60;
+  --color-navy-700: #24507a;
+
+  --color-primary: #0b5fa5;
+  --color-primary-dark: #084e88;
+  --color-primary-light: #3f83c4;
+
+  --color-surface: #f5f7fa;
+  --color-ink: #14263a;
+  --color-ink-soft: #5c6f80;
+  --color-line: #e3e9f0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Barre de défilement fine pour les listes de la messagerie */
+.mail-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
