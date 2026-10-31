@@ -8,6 +8,7 @@ import {
   Check,
   CircleAlert,
   CircleCheck,
+  Container as ContainerIcon,
   Loader2,
   Package,
   Plus,
@@ -28,6 +29,7 @@ import {
 } from "@/lib/validation/quote";
 import { cn } from "@/lib/utils";
 import { Field, SelectInput, TextInput } from "./fields";
+import { SuccessDialog } from "./success-dialog";
 
 /* ---------- État local du formulaire ---------- */
 
@@ -127,6 +129,7 @@ export function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [parcelsError, setParcelsError] = useState<string | null>(null);
   const [submission, setSubmission] = useState<Submission>({ status: "idle" });
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [honeypot, setHoneypot] = useState("");
 
   function setSenderField<K extends keyof SenderValues>(key: K, value: SenderValues[K]) {
@@ -229,6 +232,7 @@ export function QuoteForm() {
       } | null;
       if (res.ok && data?.ok && data.reference) {
         setSubmission({ status: "success", reference: data.reference });
+        setDialogOpen(true);
       } else {
         setSubmission({
           status: "error",
@@ -247,8 +251,20 @@ export function QuoteForm() {
 
   if (submission.status === "success") {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-line bg-white p-8 text-center shadow-sm sm:p-10">
-        <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent-light text-accent">
+      <>
+        <SuccessDialog
+          open={dialogOpen}
+          reference={submission.reference}
+          onClose={() => setDialogOpen(false)}
+        />
+        <div className="mx-auto max-w-xl rounded-2xl border border-line bg-white p-8 text-center shadow-sm sm:p-10">
+        <span className="mx-auto flex w-fit items-center gap-2.5 font-extrabold tracking-tight text-navy-950">
+          <span className="grid size-10 place-items-center rounded-lg bg-accent text-white">
+            <ContainerIcon className="size-5" strokeWidth={2.2} />
+          </span>
+          <span className="text-xl">GCS</span>
+        </span>
+        <span className="mx-auto mt-6 grid size-16 place-items-center rounded-full bg-accent-light text-accent">
           <CircleCheck className="size-8" />
         </span>
         <h2 className="mt-5 text-2xl font-extrabold tracking-tight text-navy-950">
@@ -261,7 +277,8 @@ export function QuoteForm() {
         <p className="mt-4 inline-block rounded-full bg-surface px-4 py-2 text-sm font-semibold text-navy-950">
           Référence : {submission.reference}
         </p>
-      </div>
+        </div>
+      </>
     );
   }
 

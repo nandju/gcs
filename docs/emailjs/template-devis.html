@@ -1,0 +1,52 @@
+<!-- Modèle EmailJS « Demande de devis GCS » — à coller dans le Code Editor
+     du dashboard EmailJS. Charte GCS : navy #0a1e30, corail #e8552d. -->
+<div style="margin:0;padding:24px 12px;background:#f5f7fa;font-family:'Segoe UI',Arial,sans-serif;color:#14263a;">
+  <div style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e3e9f0;">
+
+    <div style="background:#0a1e30;padding:24px 28px;">
+      <p style="margin:0;font-size:20px;font-weight:800;color:#ffffff;">GCS</p>
+      <p style="margin:6px 0 0;font-size:15px;color:#f6a88f;font-weight:600;">Nouvelle demande de devis</p>
+      <p style="margin:6px 0 0;font-size:12px;color:#9fb3c4;">Référence {{quote_reference}} · {{submission_date}}</p>
+    </div>
+
+    <div style="padding:20px 28px 4px;">
+      <h2 style="margin:0 0 12px;font-size:13px;color:#e8552d;text-transform:uppercase;letter-spacing:1px;">Campagne</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Campagne</td><td style="padding:5px 0;">{{campaign}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Représentant</td><td style="padding:5px 0;">{{representative}}</td></tr>
+      </table>
+    </div>
+
+    <div style="padding:20px 28px 4px;">
+      <h2 style="margin:0 0 12px;font-size:13px;color:#e8552d;text-transform:uppercase;letter-spacing:1px;">Expéditeur</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Nom complet</td><td style="padding:5px 0;">{{sender_full_name}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Téléphone</td><td style="padding:5px 0;">{{sender_phone}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">E-mail</td><td style="padding:5px 0;">{{sender_email}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Adresse</td><td style="padding:5px 0;">{{sender_address}}, {{sender_postal_code}} {{sender_city}}</td></tr>
+      </table>
+    </div>
+
+    <div style="padding:20px 28px 4px;">
+      <h2 style="margin:0 0 12px;font-size:13px;color:#e8552d;text-transform:uppercase;letter-spacing:1px;">Destinataire</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Nom complet</td><td style="padding:5px 0;">{{recipient_full_name}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Téléphone principal</td><td style="padding:5px 0;">{{recipient_phone}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Autre téléphone</td><td style="padding:5px 0;">{{recipient_other_phone}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Ville</td><td style="padding:5px 0;">{{recipient_city}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Livraison à domicile</td><td style="padding:5px 0;">{{home_delivery}}</td></tr>
+        <tr><td style="padding:5px 12px 5px 0;color:#5c6f80;white-space:nowrap;vertical-align:top;">Adresse de livraison</td><td style="padding:5px 0;">{{delivery_address}}</td></tr>
+      </table>
+    </div>
+
+    <div style="padding:20px 28px 8px;">
+      <h2 style="margin:0 0 12px;font-size:13px;color:#e8552d;text-transform:uppercase;letter-spacing:1px;">Colis ({{parcel_count}})</h2>
+      <div style="background:#f5f7fa;border:1px solid #e3e9f0;border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.7;white-space:pre-line;">{{parcels_text}}</div>
+    </div>
+
+    <div style="padding:18px 28px 26px;color:#5c6f80;font-size:12px;">
+      Demande envoyée depuis le formulaire de devis du site GCS.
+      Répondez directement à cet e-mail pour contacter l'expéditeur.
+    </div>
+  </div>
+</div>

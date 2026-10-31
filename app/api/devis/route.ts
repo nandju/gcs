@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { quoteRequestSchema, fieldErrors } from "@/lib/validation/quote";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
-import { buildQuoteEmail } from "@/services/email/templates";
-import { emailConfigured, sendNotification } from "@/services/email/resend";
+import { quoteTemplateParams } from "@/services/email/templates";
+import {
+  emailJsConfigured,
+  quoteTemplateId,
+  sendViaEmailJs,
+} from "@/services/email/emailjs";
 
 const RATE = { limit: 5, windowMs: 10 * 60_000 }; // 5 demandes / 10 min / IP
 
@@ -39,7 +43,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true, reference: reference() });
   }
 
-  if (!emailConfigured()) {
+  const templateId = quoteTemplateId();
+  if (!emailJsConfigured(templateId)) {
     return NextResponse.json(
       {
         ok: false,
@@ -51,11 +56,10 @@ export async function POST(request: NextRequest) {
   }
 
   const meta = { reference: reference(), submittedAt: new Date() };
-  const email = buildQuoteEmail(parsed.data, meta);
-  const result = await sendNotification({
-    ...email,
-    replyTo: parsed.data.sender.email,
-  });
+  const result = await sendViaEmailJs(
+    templateId as string,
+    quoteTemplateParams(parsed.data, meta),
+  );
 
   if (!result.ok) {
     return NextResponse.json(
